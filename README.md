@@ -1,27 +1,54 @@
-# 📝 BlogCMS - Content Management System
+# 🚀 BlogCMS - PHP Native Project
 
-**BlogCMS** is a lightweight, performant platform designed to manage blog content efficiently. Built from scratch using core PHP, it provides a secure and intuitive interface for Administrators, Authors, and Visitors.
+Un système de gestion de contenu (CMS) complet, développé en PHP procédural (sans framework) pour gérer un blog dynamique.
 
-## 📂 Initial File Structure
+## 🌟 Fonctionnalités
 
-This project follows a clean, organized structure to separate logic, configuration, and views:
+### 🌍 Partie Publique
+* Affichage des articles avec pagination (Accueil).
+* Lecture détaillée des articles.
+* Système de commentaires (nécessite une connexion).
+* Navbar dynamique (Login/Dashboard).
 
-```text
-BlogCMS/
-├── assets/              # Static files
-│   ├── css/             # Stylesheets (Tailwind output)
-│   ├── js/              # JavaScript files
-│   └── images/          # Site assets
-├── config/              # Configuration files
-│   └── db.php           # Database connection (PDO)
-├── includes/            # Reusable PHP snippets
-│   ├── header.php       # HTML Head & Navigation
-│   └── footer.php       # HTML Footer
-├── admin/               # Admin Dashboard area
-│   ├── dashboard.php
-│   └── users.php
-├── uploads/             # User uploaded images
-├── index.php            # Homepage (Public view)
-├── login.php            # Authentication page
-├── article.php          # Single article view
-└── README.md            # Project documentation
+### 🔐 Authentification
+* Inscription et Connexion sécurisées.
+* Hachage des mots de passe (Bcrypt).
+* Gestion des sessions (Admin, Author, Visitor).
+
+### ⚙️ Dashboard (Admin & Auteurs)
+* **Statistiques :** Vue d'ensemble (Total articles, catégories...).
+* **Gestion Articles :** Créer, Modifier, Supprimer (CRUD) avec Upload d'images.
+* **Gestion Catégories :** (Admin seulement) Ajouter et supprimer des catégories.
+* **Gestion Utilisateurs :** (Admin seulement) Modifier les rôles (Admin/Author/Visitor).
+
+## 🛠️ Technologies Utilisées
+* **Backend :** PHP 8 (PDO, Prepared Statements).
+* **Frontend :** HTML5, Tailwind CSS (CDN).
+* **Database :** MySQL.
+
+## 📦 Installation
+
+1. **Cloner le projet :**
+   Placez le dossier `BlogCMS` dans votre dossier serveur (ex: `htdocs`).
+
+2. **Base de Données :**
+   * Créez une base de données nommée `blog` dans phpMyAdmin.
+   * Importez le fichier `database.sql` situé à la racine du projet.
+
+3. **Configuration :**
+   * Vérifiez les paramètres dans `config/db.php` :
+     ```php
+     $user = 'root';
+     $pass = ''; // Ou votre mot de passe
+     ```
+
+4. **Lancement :**
+   * Accédez à : `http://localhost/BlogCMS`
+
+## 👤 Comptes de Test
+
+* **Admin :** `admin@blog.com` / `123456` (Si créé manuellement)
+* **Auteur :** `author@test.com` / `123456`
+
+---
+*Projet réalisé à des fins d'apprentissage.*

@@ -1,4 +1,4 @@
-# 🚀 BlogCMS - PHP Native Project
+# 🚀 Blog_CMS - PHP Native Project
 
 Un système de gestion de contenu (CMS) complet, développé en PHP procédural (sans framework) pour gérer un blog dynamique.
 
@@ -29,7 +29,7 @@ Un système de gestion de contenu (CMS) complet, développé en PHP procédural 
 ## 📦 Installation
 
 1. **Cloner le projet :**
-   Placez le dossier `BlogCMS` dans votre dossier serveur (ex: `htdocs`).
+   Placez le dossier `Blog_CMS` dans votre dossier serveur (ex: `htdocs`).
 
 2. **Base de Données :**
    * Créez une base de données nommée `blog` dans phpMyAdmin.
@@ -39,16 +39,14 @@ Un système de gestion de contenu (CMS) complet, développé en PHP procédural 
    * Vérifiez les paramètres dans `config/db.php` :
      ```php
      $user = 'root';
-     $pass = ''; // Ou votre mot de passe
+     $pass = '';
      ```
 
 4. **Lancement :**
-   * Accédez à : `http://localhost/BlogCMS`
+   * Accédez à : `http://localhost/Blog_CMS`
 
 ## 👤 Comptes de Test
 
-* **Admin :** `admin@blog.com` / `123456` (Si créé manuellement)
+* **Admin :** `admin@blog.com` / `123456`
 * **Auteur :** `author@test.com` / `123456`
-
----
-*Projet réalisé à des fins d'apprentissage.*
+   * Not woreking yet 

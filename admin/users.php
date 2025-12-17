@@ -74,6 +74,13 @@ $users = $stmt->fetchAll();
                                 <i class="fas fa-user-cog"></i> Change Role
                             </a>
                         </td>
+                        <td>
+                            <a href="delete_user.php?id=<?php echo $user['id_Utilisateur']; ?>" 
+                                onclick="return confirm('Are u sure you want to delate this user !');"
+                                style="color: red;">
+                                Delete
+                            </a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

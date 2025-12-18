@@ -7,6 +7,7 @@ if (!isset($_GET['id'])) {
     exit();
 }
 $id_article = $_GET['id'];
+echo $id_article;
 $message = "";
 
 if (isset($_POST['submit_comment'])) {
@@ -18,13 +19,12 @@ if (isset($_POST['submit_comment'])) {
     $content = trim($_POST['comment']);
     $user_id = $_SESSION['user_id'];
 
-    if (!empty($content)) {
+    if (!empty($content)) 
+    {
         $sql = "INSERT INTO commentair (comment_content, id_article, id_utilisateur, status_comment, created_at) 
                 VALUES (?, ?, ?, 'approved', NOW())";
         $stmt = $pdo->prepare($sql);
-        if ($stmt->execute([$content, $id_article, $user_id])) {
-            $message = "";
-        }
+        $stmt->execute([$content, $id_article, $user_id]);
     } else {
         $message = "content in empty!";
     }
@@ -38,7 +38,8 @@ $stmt = $pdo->prepare("SELECT article.*, utilisateur.user_name, category.name_ca
 $stmt->execute([$id_article]);
 $article = $stmt->fetch();
 
-if (!$article) die("Article introuvable.");
+if (!$article) 
+    die("Article introuvable.");
 
 $sql_comments = "SELECT commentair.*, utilisateur.user_name 
                  FROM commentair 
@@ -105,13 +106,13 @@ $comments = $stmt_c->fetchAll();
             </h3>
 
             <?php if($message): ?>
-                <div class="bg-green-100 text-green-700 p-3 rounded mb-4"><?php echo $message; ?></div>
+                <div class="bg-red-100 text-white-700 p-3 rounded mb-4"><?php echo $message; ?></div>
             <?php endif; ?>
 
             <?php if(isset($_SESSION['user_id'])): ?>
                 <form method="POST" class="mb-8">
                     <label class="block font-bold text-gray-700 mb-2">Leave a comment</label>
-                    <textarea name="comment" rows="3" required placeholder="Write something..." 
+                    <textarea name="comment" rows="3" placeholder="Write something..." 
                               class="w-full border rounded p-3 focus:outline-none focus:border-blue-500"></textarea>
                     <button type="submit" name="submit_comment" class="mt-2 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-bold">
                         Post Comment
@@ -140,6 +141,9 @@ $comments = $stmt_c->fetchAll();
                                 <?php echo nl2br(htmlspecialchars($com['comment_content'])); ?>
                             </p>
                         </div>
+                        <?php if($_SESSION['role'] == "admin"): ?>
+                            <a href="deletecomment.php?id=<?php echo $com['id_commentair']?>&id_article=<?php echo $article['id_article'] ?>" class="text-red-500 hover:text-red-700">Delete</a>
+                        <?php endif ?>
                     </div>
                 <?php endforeach; ?>
                 

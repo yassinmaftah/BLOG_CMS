@@ -44,16 +44,18 @@ $total_categories = $stmt->fetchColumn();
                 <i class="fas fa-tachometer-alt w-6"></i>
                 <span>Dashboard</span>
             </a>
+            <?php if($role !== "admin"): ?>
 
-            <a href="articles.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition">
-                <i class="fas fa-newspaper w-6"></i>
-                <span>My Articles</span>
-            </a>
+                <a href="articles.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition">
+                    <i class="fas fa-newspaper w-6"></i>
+                    <span>My Articles</span>
+                </a>
 
-            <a href="add_article.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition">
-                <i class="fas fa-plus-circle w-6"></i>
-                <span>Add Article</span>
-            </a>
+                <a href="add_article.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition">
+                    <i class="fas fa-plus-circle w-6"></i>
+                    <span>Add Article</span>
+                </a>
+            <?php endif; ?>
 
             <?php if($role === 'admin'): ?>
                 <div class="pt-4 pb-2 text-xs text-gray-400 uppercase font-bold">Administration</div>

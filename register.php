@@ -1,8 +1,10 @@
 <?php
+session_start();
 require 'config/db.php';
 
 $error = "";
-$success = "";
+$username = ""; 
+$email = "";
 
 if (isset($_POST['register_btn'])) {
     $username = trim($_POST['username']);
@@ -25,7 +27,13 @@ if (isset($_POST['register_btn'])) {
             $stmt = $pdo->prepare($sql);
             
             if ($stmt->execute([$username, $email, $hashed_password])) {
-                $success = "account creation valid";
+                $new_user_id = $pdo->lastInsertId();
+                $_SESSION['user_id'] = $new_user_id;
+                $_SESSION['username'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = 'author';
+                header("Location: index.php");
+                exit();
             } else {
                 $error = "account creation not valid.";
             }
@@ -50,28 +58,23 @@ if (isset($_POST['register_btn'])) {
             <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm"><?php echo $error; ?></div>
         <?php endif; ?>
 
-        <?php if($success): ?>
-            <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-sm">
-                <?php echo $success; ?> <a href="login.php" class="underline font-bold">Login here</a>
-            </div>
-        <?php endif; ?>
 
         <form method="POST" action="">
       <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                <input type="text" name="username" required 
+                <input type="text" name="username" value="<?php echo htmlspecialchars($username); ?>"  
                        class="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500">
             </div>
 
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                <input type="email" name="email" required 
+                <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>" 
                        class="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500">
             </div>
 
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                <input type="password" name="password" required 
+                <input type="password" name="password"  
                        class="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500">
             </div>
 

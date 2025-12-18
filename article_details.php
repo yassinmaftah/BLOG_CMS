@@ -7,7 +7,6 @@ if (!isset($_GET['id'])) {
     exit();
 }
 $id_article = $_GET['id'];
-echo $id_article;
 $message = "";
 
 if (isset($_POST['submit_comment'])) {

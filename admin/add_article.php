@@ -22,20 +22,10 @@ if (isset($_POST['add_article_btn'])) {
 
     $image_name = $_FILES['image']['name'];
     $image_tmp = $_FILES['image']['tmp_name'];
-
-    echo "image name : $image_name";
-    echo "<br><br>";
-    echo "image temp : $image_tmp";
-    echo "<br><br>";
     
     $upload_dir = "../uploads/";
     $target_file = $upload_dir . basename($image_name);
-    echo "target file : $target_file";
-    echo "<br><br>";
     
-    $db_image_path = "uploads/" . basename($image_name);
-    echo "image path : $db_image_path";
-
     if (!empty($title) && !empty($content) && !empty($image_name)) {
         
         if (move_uploaded_file($image_tmp, $target_file)) {

@@ -24,6 +24,8 @@ if (isset($_POST['submit_comment'])) {
                 VALUES (?, ?, ?, 'approved', NOW())";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$content, $id_article, $user_id]);
+        header("Location: article_details.php?id=" . $id_article);
+        exit();
     } else {
         $message = "content in empty!";
     }
@@ -36,6 +38,8 @@ $stmt = $pdo->prepare("SELECT article.*, utilisateur.user_name, category.name_ca
                        WHERE id_article = ?");
 $stmt->execute([$id_article]);
 $article = $stmt->fetch();
+
+// echo $article['user_name'];
 
 if (!$article) 
     die("Article introuvable.");
@@ -140,7 +144,7 @@ $comments = $stmt_c->fetchAll();
                                 <?php echo nl2br(htmlspecialchars($com['comment_content'])); ?>
                             </p>
                         </div>
-                        <?php if($_SESSION['role'] == "admin"): ?>
+                        <?php if($_SESSION['role'] == "admin" || $_SESSION['user_id'] == $com['id_utilisateur'] || $_SESSION['user_id'] == $article['id_auther']): ?>
                             <a href="deletecomment.php?id=<?php echo $com['id_commentair']?>&id_article=<?php echo $article['id_article'] ?>" class="text-red-500 hover:text-red-700">Delete</a>
                         <?php endif ?>
                     </div>

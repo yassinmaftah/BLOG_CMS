@@ -1,52 +1,70 @@
-# 🚀 Blog_CMS - PHP Native Project
+# 📝 BlogCMS - PHP Native Project
 
-Un système de gestion de contenu (CMS) complet, développé en PHP procédural (sans framework) pour gérer un blog dynamique.
+Un système de gestion de contenu (CMS) simple et performant développé en PHP natif. Ce projet permet aux utilisateurs de créer des articles, gérer des images et interagir via des commentaires, avec un système de permissions avancé.
 
-## 🌟 Fonctionnalités
+## 🚀 Fonctionnalités Clés (Key Features)
 
-### 🌍 Partie Publique
-* Affichage des articles avec pagination (Accueil).
-* Lecture détaillée des articles.
-* Système de commentaires (nécessite une connexion).
-* Navbar dynamique (Login/Dashboard).
+### 1. Authentification & Utilisateurs
+* **Inscription sécurisée :** Hachage des mots de passe (`password_hash`), vérification d'email unique.
+* **Auto-Login :** Connexion automatique après l'inscription.
+* **Système de Session :** Gestion sécurisée des sessions utilisateurs.
 
-### 🔐 Authentification
-* Inscription et Connexion sécurisées.
-* Hachage des mots de passe (Bcrypt).
-* Gestion des sessions (Admin, Author, Visitor).
+### 2. Gestion des Articles (CRUD)
+* **Création & Édition :** Possibilité de rédiger des articles avec titres et catégories.
+* **Image Upload :** Gestion complète de l'upload d'images (validation d'extension, déplacement depuis `tmp`, renommage unique).
+* **Affichage :** Pagination et formatage des dates.
+* **Préservation des données :** Si un auteur est supprimé, ses articles restent (Auteur devient "Unknown" via `ON DELETE SET NULL`).
 
-### ⚙️ Dashboard (Admin & Auteurs)
-* **Statistiques :** Vue d'ensemble (Total articles, catégories...).
-* **Gestion Articles :** Créer, Modifier, Supprimer (CRUD) avec Upload d'images.
-* **Gestion Catégories :** (Admin seulement) Ajouter et supprimer des catégories.
-* **Gestion Utilisateurs :** (Admin seulement) Modifier les rôles (Admin/Author/Visitor).
+### 3. Système de Commentaires & Permissions
+* Les utilisateurs peuvent commenter les articles.
+* **Logique de Suppression Avancée :**
+    * L'Admin peut tout supprimer.
+    * L'auteur du commentaire peut supprimer son propre commentaire.
+    * L'auteur de l'article peut modérer (supprimer) les commentaires sur son post.
+
+### 4. Sécurité & Architecture
+* **Protection XSS :** Utilisation de `htmlspecialchars()` pour l'affichage.
+* **Protection SQL Injection :** Utilisation exclusive de **PDO** avec requêtes préparées.
+* **Base de Données :** Architecture relationnelle optimisée (`INNER JOIN`, `LEFT JOIN`).
+
+---
 
 ## 🛠️ Technologies Utilisées
-* **Backend :** PHP 8 (PDO, Prepared Statements).
-* **Frontend :** HTML5, Tailwind CSS (CDN).
-* **Database :** MySQL.
 
-## 📦 Installation
+* **Backend :** PHP 8+ (Native)
+* **Database :** MySQL
+* **Frontend :** TailwindCSS (pour le design), HTML5
+* **Outils :** XAMPP
 
-1. **Cloner le projet :**
-   Placez le dossier `Blog_CMS` dans votre dossier serveur (ex: `htdocs`).
+---
 
-2. **Base de Données :**
-   * Créez une base de données nommée `blog` dans phpMyAdmin.
-   * Importez le fichier `database.sql` situé à la racine du projet.
+## ⚙️ Installation & Configuration
 
-3. **Configuration :**
-   * Vérifiez les paramètres dans `config/db.php` :
-     ```php
-     $user = 'root';
-     $pass = '';
-     ```
+Suivez ces étapes pour lancer le projet en local :
 
-4. **Lancement :**
-   * Accédez à : `http://localhost/Blog_CMS`
+1.  **Cloner ou Télécharger** le projet dans votre dossier serveur (ex: `htdocs`).
+2.  **Base de Données :**
+    * Ouvrez phpMyAdmin.
+    * Créez une nouvelle base de données nommée `blog`.
+    * Importez le fichier `database.sql` (fourni dans le dossier racine).
+3.  **Configuration :**
+    * Ouvrez le fichier `config/db.php`.
+    * Vérifiez les identifiants (Host, User, Password, DB Name).
+4.  **Lancement :**
+    * Ouvrez votre navigateur et allez sur `http://localhost/BLOG_CMS`.
 
-## 👤 Comptes de Test
+---
 
-* **Admin :** `admin@blog.com` / `123456`
-* **Auteur :** `author@test.com` / `123456`
-   * Not woreking yet 
+## 🗄️ Structure de la Base de Données
+
+Le projet repose sur 4 tables principales :
+* `utilisateur` (id, name, email, password, role...)
+* `article` (id, title, content, image, id_author...)
+* `category` (id, name...)
+* `commentair` (id, content, id_user, id_article...)
+
+---
+
+## 👤 Auteur
+**[Ton Nom Complet]**
+*Projet réalisé dans le cadre de la formation [Nom de ta filière/formation].*
